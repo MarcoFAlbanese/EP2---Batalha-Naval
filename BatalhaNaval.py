@@ -138,11 +138,11 @@ print(" ============================ \n")
 
 
 count = 0
-dicPaises={'1':'','2':'','3':'','4':'','5':''}
+dicPaises={}
 
 for pais in paises:  
     print("{0}: {1} \n".format(count,pais))
-    dicPaises[str(count+11)]=pais
+    dicPaises[str(count+1)]=pais
 
     for barco in paises[pais]:
         print("     {0} {1}".format(paises[pais][barco],barco))
