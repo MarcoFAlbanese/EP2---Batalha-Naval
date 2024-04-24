@@ -142,7 +142,7 @@ dicPaises={'1':'','2':'','3':'','4':'','5':''}
 
 for pais in paises:  
     print("{0}: {1} \n".format(count,pais))
-    dicPaises[str(count)]=pais
+    dicPaises[str(count+11)]=pais
 
     for barco in paises[pais]:
         print("     {0} {1}".format(paises[pais][barco],barco))
@@ -156,7 +156,12 @@ n=input("\n Qual o número de nação da sua frota?")
 
 print("\n")
 
+if n not in dicPaises:
+    print("Opção inválida")
+    n=input("\n Qual o número de nação da sua frota?")
 print(" Você escolheu a nação {0} \n".format(dicPaises[str(n)]))
 print("Agora é a sua vez de alocar seus navios de guerra!\n")
+
+
 
        
