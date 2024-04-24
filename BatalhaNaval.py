@@ -9,6 +9,8 @@ def cria_mapa(n):
 
     return mapa
 
+mapaFunc=cria_mapa(10)
+
 def posicao_suporta(mapa, blocos, linha, coluna, orientacao):
     
     if orientacao == "h":
@@ -155,3 +157,6 @@ n=input("\n Qual o número de nação da sua frota?")
 print("\n")
 
 print(" Você escolheu a nação {0} \n".format(dicPaises[str(n)]))
+print("Agora é a sua vez de alocar seus navios de guerra!\n")
+
+       
