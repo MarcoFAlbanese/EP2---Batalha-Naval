@@ -126,3 +126,24 @@ cores = {
     'cyan': '\u001b[36m',
     'white': '\u001b[37m'
 }
+
+print(" ============================ \n")
+print("|                            | \n")
+print ("| Bem-vindo ao batalha naval | \n")
+print("|                            | \n")
+print(" ============================ \n")
+
+
+
+count = 0
+for pais in paises:  
+    print("{0}: {1} \n".format(count,pais))
+
+    for barco in paises[pais]:
+        print("     {0} {1}".format(paises[pais][barco],barco))
+    
+    print("\n")
+    
+    count += 1
+
+print("\n Qual o número de nação da sua frota?")
