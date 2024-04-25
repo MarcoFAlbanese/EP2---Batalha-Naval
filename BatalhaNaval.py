@@ -152,16 +152,27 @@ for pais in paises:
     count += 1
 
 
-n=input("\n Qual o número de nação da sua frota?")
+numPaisEscolhido=input("\n Qual o número de nação da sua frota?")
+
 
 print("\n")
 
-if n not in dicPaises:
+if numPaisEscolhido not in dicPaises:
     print("Opção inválida")
-    n=input("\n Qual o número de nação da sua frota?")
-print(" Você escolheu a nação {0} \n".format(dicPaises[str(n)]))
+    numPaisEscolhido=input("\n Qual o número de nação da sua frota?")
+print(" Você escolheu a nação {0} \n".format(dicPaises[numPaisEscolhido]))
 print("Agora é a sua vez de alocar seus navios de guerra!\n")
+numPaisEscolhido = dicPaises[numPaisEscolhido]
 
 
+#Lista para cada pais, cada argumento é o número de blocos e cada indice é um barco
 
-       
+lista_paises_frota = []
+frotaEscolhida = paises[numPaisEscolhido]
+for navio in frotaEscolhida:
+    numNavios = frotaEscolhida[navio]
+    for j in range(numNavios):
+        lista_paises_frota.append(config[navio])
+
+print(lista_paises_frota)
+
