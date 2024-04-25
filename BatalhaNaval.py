@@ -9,8 +9,6 @@ def cria_mapa(n):
 
     return mapa
 
-mapaFunc=cria_mapa(10)
-
 def posicao_suporta(mapa, blocos, linha, coluna, orientacao):
     
     if orientacao == "h":
@@ -174,5 +172,18 @@ for navio in frotaEscolhida:
     for j in range(numNavios):
         lista_paises_frota.append(config[navio])
 
-print(lista_paises_frota)
+#print(lista_paises_frota)
+
+mapaFunc=aloca_navios(cria_mapa(10),lista_paises_frota)
+
+print(["A",'B','C','D','E','F','G','H','I','J'])
+print ("\n")
+
+for e in range (len(mapaFunc)):
+    print (mapaFunc[e])
+    print ("\n")
+
+#caracter bloco ▓
+
+#criação de mapa do jogador
 
