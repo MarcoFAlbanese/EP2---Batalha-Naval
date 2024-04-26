@@ -136,6 +136,22 @@ cores = {
 
 relacao_coluna_num = {"a":0,"b":1,"c":2,"d":3,"e":4,"f":5,"g":6,"h":7,"i":8,"j":9}
 
+
+#criar dicionario com todos os paises e suas frotas como bloquinhos
+dic_pais_frota={}
+         
+for pais in paises:
+    if pais not in dic_pais_frota:
+        lista_blocos = []
+        lista_paises_frota = []
+        frotaEscolhida = paises[pais]
+        for navio in frotaEscolhida:
+            numNavios = frotaEscolhida[navio]
+            lista_blocos.append(numNavios)
+            for j in range(numNavios):
+                lista_paises_frota.append(config[navio])
+            dic_pais_frota[pais] = lista_paises_frota
+
 #print da introdução
 print(" ============================ \n")
 print("|                            | \n")
@@ -227,7 +243,17 @@ else:
                 mapa_jogador[linha_escolhida][coluna_escolhida_num + l] = "\u001b[32m▓\u001b[37m"
 
         imprime_mapa_com_numeros(mapa_jogador)
-    
+
+pais_jogador=dicPaises[numPaisEscolhido]
+del dic_pais_frota[pais_jogador]
+
+pais_comp=random.choice(list(dic_pais_frota.keys()))
+frota_comp=dic_pais_frota[pais_comp]
+mapa_comp = aloca_navios(cria_mapa(10),frota_comp)
+print(frota_comp)
+print(pais_comp)
+print("\n")
+imprime_mapa_com_numeros(mapa_comp)
 
 
 
