@@ -164,13 +164,15 @@ numPaisEscolhido = dicPaises[numPaisEscolhido]
 
 
 #Lista para cada pais, cada argumento é o número de blocos e cada indice é um barco
-
-lista_paises_frota = []
-frotaEscolhida = paises[numPaisEscolhido]
-for navio in frotaEscolhida:
-    numNavios = frotaEscolhida[navio]
-    for j in range(numNavios):
-        lista_paises_frota.append(config[navio])
+aleatorioUser = input("Deseja alocar aleatoriamente a sua frota? Sim ou Não?")
+aleatorioUserLower = aleatorioUser.lower()
+if (aleatorioUserLower== "sim"):
+    lista_paises_frota = []
+    frotaEscolhida = paises[numPaisEscolhido]
+    for navio in frotaEscolhida:
+        numNavios = frotaEscolhida[navio]
+        for j in range(numNavios):
+            lista_paises_frota.append(config[navio])
 
 #print(lista_paises_frota)
 #criação de mapa do computador
@@ -189,3 +191,4 @@ def imprime_mapa_com_numeros(mapa):
         print(str(i) + " " + " ".join(linha))  
 
 imprime_mapa_com_numeros(mapaFunc)
+
