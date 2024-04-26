@@ -165,7 +165,7 @@ for pais in paises:
 numPaisEscolhido=input("\n Qual o número de nação da sua frota?")
 print("\n")
 
-if numPaisEscolhido not in dicPaises:
+while numPaisEscolhido not in dicPaises:
     print("Opção inválida")
     numPaisEscolhido=input("\n Qual o número de nação da sua frota?")
 print(" Você escolheu a nação {0} \n".format(dicPaises[numPaisEscolhido]))
@@ -186,6 +186,9 @@ if (aleatorioUserLower== "sim"):
         lista_blocos.append(numNavios)
         for j in range(numNavios):
             lista_paises_frota.append(config[navio])
+    mapa_jogador=aloca_navios(cria_mapa(10),lista_paises_frota)
+    imprime_mapa_com_numeros(mapa_jogador)
+
 else:
     mapa_jogador=cria_mapa(10)
     lista_paises_frota=[]
@@ -225,9 +228,7 @@ else:
 
         imprime_mapa_com_numeros(mapa_jogador)
     
-#print(lista_paises_frota)
-#criação de mapa do computador
-#mapaFunc=aloca_navios(cria_mapa(10),lista_paises_frota)
+
 
 
 
@@ -235,5 +236,5 @@ else:
 
 
 
-#imprime_mapa_com_numeros(mapaFunc)
+
 
