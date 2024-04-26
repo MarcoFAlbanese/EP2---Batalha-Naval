@@ -65,14 +65,9 @@ def foi_derrotado(matriz):
 #impressão do mapa com numeros e letras
 def imprime_mapa_com_numeros(mapa):
     letras_colunas = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-    print("   " + " ".join(letras_colunas)) 
+    print("  " + " ".join(letras_colunas)) 
     for i, linha in enumerate(mapa):
-        print(str(i+1).rjust(2) + " " + " ".join(linha))  
-
-# Example usage:
-# mapa = [[' ', ' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ', ' ']]
-# imprime_mapa_com_numeros(mapa)
-
+        print(str(i+1) + " " + " ".join(linha))  
 
 # quantidade de blocos por modelo de navio
 config = {
@@ -264,11 +259,38 @@ print("\n")
 imprime_mapa_com_numeros(mapa_comp)
 
 
-
+mapa_show_comp=cria_mapa(10)
 
 #caracter bloco ▓
 
+#rodada jogador
 
+if (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
 
+    coluna_palpite  = input("Informe a letra da coluna (A-J): ").lower()
+    linha_palpite = int(input("Informe o número da linha (1-10): ")) - 1  
+    orientacao_palpite = input("Informe a orientação [v|h]: ").lower()
+    coluna_palpite_num=relacao_coluna_num.get(coluna_palpite)
 
+    if coluna_escolhida_num == -1 or linha_escolhida < 0 or linha_escolhida >= len(mapa_jogador):
+            print("Coordenadas inválidas! Por favor, escolha uma letra de coluna entre A e J e um número de linha entre 1 e 10.")
+    if orientacao_escolhida not in ['v', 'h']:
+            print("Orientação inválida! Por favor, escolha 'v' para vertical ou 'h' para horizontal.")
+    if not posicao_suporta(mapa_jogador, navio, linha_escolhida, coluna_escolhida_num, orientacao_escolhida):
+            print("Navio não cabe nesta posição. Escolha outra posição.")
+    
+    if (mapa_comp[linha_palpite][coluna_palpite_num]=="N"):
+        mapa_comp[linha_palpite][coluna_palpite_num]=="A"
+        mapa_show_comp[linha_palpite][coluna_palpite_num]=="\u001b[31m▓\u001b[37m"
+        imprime_mapa_com_numeros(mapa_show_comp)
+    
+    elif (mapa_comp[linha_palpite][coluna_palpite_num]=="A"):
+        print("Você já fez um chute nessa posição, escolha outra")
 
+    else:
+        mapa_show_comp[linha_palpite][coluna_palpite_num]=="\u001b[34m▓\u001b[37m"
+        imprime_mapa_com_numeros(mapa_show_comp)
+    
+#rodada computador
+
+print("tomás")
