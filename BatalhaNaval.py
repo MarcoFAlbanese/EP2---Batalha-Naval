@@ -67,7 +67,7 @@ def imprime_mapa_com_numeros(mapa):
     letras_colunas = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
     print("  " + " ".join(letras_colunas)) 
     for i, linha in enumerate(mapa):
-        print(str(i) + " " + " ".join(linha))  
+        print(str(i+1) + " " + " ".join(linha))  
 
 # quantidade de blocos por modelo de navio
 config = {
@@ -133,6 +133,9 @@ cores = {
     'cyan': '\u001b[36m',
     'white': '\u001b[37m'
 }
+
+relacao_coluna_num = {"a":0,"b":1,"c":2,"d":3,"e":4,"f":5,"g":6,"h":7,"i":8,"j":9}
+
 #print da introdução
 print(" ============================ \n")
 print("|                            | \n")
@@ -195,24 +198,32 @@ else:
         lista_blocos.append(numNavios)
     
     for navio in lista_blocos:
-        coluna_escolhida=input("Informe a letra")
-        linha_escolhida=int(input("Informe o número"))
-        orientacao_escolhida=input("Informe a orientação [v|h]")
+        coluna_escolhida = input("Informe a letra da coluna (A-J): ").lower()
+        linha_escolhida = int(input("Informe o número da linha (1-10): ")) - 1  
+        orientacao_escolhida = input("Informe a orientação [v|h]: ").lower()
 
-        while posicao_suporta(mapa_jogador,navio,linha_escolhida,coluna_escolhida,orientacao_escolhida)!=True:
-            print("Opção inválida")
-            coluna_escolhida=input("Informe a letra")
-            linha_escolhida=input("Informe o número")
-            orientacao_escolhida=input("Informe a orientação [v|h]")
+        coluna_escolhida_num = relacao_coluna_num.get(coluna_escolhida, -1)  
 
-        else:
-            
-            if(orientacao_escolhida == "v"):
-                for l in range (navio):
-                    mapa_jogador[linha_escolhida+l][coluna_escolhida] = "N"
-            elif (orientacao_escolhida == "h"):
-                for l in range(navio):
-                    mapa_jogador[linha_escolhida][coluna_escolhida+l] = "N"
+        
+        if coluna_escolhida_num == -1 or linha_escolhida < 0 or linha_escolhida >= len(mapa_jogador):
+            print("Coordenadas inválidas! Por favor, escolha uma letra de coluna entre A e J e um número de linha entre 1 e 10.")
+            continue
+        if orientacao_escolhida not in ['v', 'h']:
+            print("Orientação inválida! Por favor, escolha 'v' para vertical ou 'h' para horizontal.")
+            continue
+        if not posicao_suporta(mapa_jogador, navio, linha_escolhida, coluna_escolhida_num, orientacao_escolhida):
+            print("Navio não cabe nesta posição. Escolha outra posição.")
+            continue
+
+        # Coloca o navio no mapa
+        if orientacao_escolhida == "v":
+            for l in range(navio+1):
+                mapa_jogador[linha_escolhida + l][coluna_escolhida_num] = "\u001b[32m▓\u001b[37m"
+        elif orientacao_escolhida == "h":
+            for l in range(navio+1):
+                mapa_jogador[linha_escolhida][coluna_escolhida_num + l] = "\u001b[32m▓\u001b[37m"
+
+        imprime_mapa_com_numeros(mapa_jogador)
     
 #print(lista_paises_frota)
 #criação de mapa do computador
