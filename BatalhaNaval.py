@@ -198,7 +198,10 @@ else:
 
     for navio in frotaEscolhida:
         numNavios = frotaEscolhida[navio]
-        lista_blocos.append(numNavios)
+        numBlocos = config[navio]
+        for i in range(numNavios):
+            lista_blocos.append(numBlocos)
+    
     
     for navio in lista_blocos:
         coluna_escolhida = input("Informe a letra da coluna (A-J): ").lower()
@@ -220,10 +223,10 @@ else:
 
         # Coloca o navio no mapa
         if orientacao_escolhida == "v":
-            for l in range(navio+1):
+            for l in range(navio):
                 mapa_jogador[linha_escolhida + l][coluna_escolhida_num] = "\u001b[32m▓\u001b[37m"
         elif orientacao_escolhida == "h":
-            for l in range(navio+1):
+            for l in range(navio):
                 mapa_jogador[linha_escolhida][coluna_escolhida_num + l] = "\u001b[32m▓\u001b[37m"
 
         imprime_mapa_com_numeros(mapa_jogador)
