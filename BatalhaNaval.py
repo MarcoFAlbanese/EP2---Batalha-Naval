@@ -275,7 +275,7 @@ while (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
     if coluna_palpite_num == -1 or linha_palpite < 0 or linha_palpite >= len(mapa_jogador):
             print("Coordenadas inválidas! Por favor, escolha uma letra de coluna entre A e J e um número de linha entre 1 e 10.")
    
-    if (mapa_jogador[linha_palpite][coluna_palpite_num]=="N"):
+    if (mapa_comp[linha_palpite][coluna_palpite_num]=="N"):
         mapa_comp[linha_palpite][coluna_palpite_num]="A"
         mapa_show_comp[linha_palpite][coluna_palpite_num]="\u001b[31m▓\u001b[37m"
     
