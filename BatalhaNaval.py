@@ -1,5 +1,6 @@
 import random
 
+#função para criar o mapa
 def cria_mapa(n):
     listaf = [' '] * n
     mapa = []
@@ -9,6 +10,7 @@ def cria_mapa(n):
 
     return mapa
 
+#função para calcular se cabe o navio no mapa
 def posicao_suporta(mapa, blocos, linha, coluna, orientacao):
     
     if orientacao == "h":
@@ -26,6 +28,7 @@ def posicao_suporta(mapa, blocos, linha, coluna, orientacao):
                 return False
     return True
 
+#função para alocar randomicamente navios no mapa
 def aloca_navios(mapa,lista):
     numlinha = len(mapa)
     numcol = len(mapa[0])
@@ -51,13 +54,10 @@ def aloca_navios(mapa,lista):
 
     return (mapa)
 
-
+# função de condição de vitoria
 def foi_derrotado(matriz):
-
     for e in range (len(matriz)):
-
         if 'N' in matriz[e]:
-
             return False
     
     return True
@@ -126,7 +126,7 @@ cores = {
     'cyan': '\u001b[36m',
     'white': '\u001b[37m'
 }
-
+#print da introdução
 print(" ============================ \n")
 print("|                            | \n")
 print ("| Bem-vindo ao batalha naval | \n")
@@ -134,12 +134,12 @@ print("|                            | \n")
 print(" ============================ \n")
 
 
-
+# loop para imprimir as frotas disponiveis
 count = 0
 dicPaises={}
 
 for pais in paises:  
-    print("{0}: {1} \n".format(count,pais))
+    print("{0}: {1} \n".format(count+1,pais))
     dicPaises[str(count+1)]=pais
 
     for barco in paises[pais]:
@@ -150,9 +150,9 @@ for pais in paises:
     count += 1
 
 
+# loop para checar se escholha é valida
+
 numPaisEscolhido=input("\n Qual o número de nação da sua frota?")
-
-
 print("\n")
 
 if numPaisEscolhido not in dicPaises:
@@ -173,17 +173,19 @@ for navio in frotaEscolhida:
         lista_paises_frota.append(config[navio])
 
 #print(lista_paises_frota)
-
+#criação de mapa do computador
 mapaFunc=aloca_navios(cria_mapa(10),lista_paises_frota)
 
-print(["A",'B','C','D','E','F','G','H','I','J'])
-print ("\n")
 
-for e in range (len(mapaFunc)):
-    print (mapaFunc[e])
-    print ("\n")
 
 #caracter bloco ▓
 
-#criação de mapa do jogador
+#impressão do mapa com numeros e letras
 
+def imprime_mapa_com_numeros(mapa):
+    letras_colunas = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+    print("  " + " ".join(letras_colunas)) 
+    for i, linha in enumerate(mapa):
+        print(str(i) + " " + " ".join(linha))  
+
+imprime_mapa_com_numeros(mapaFunc)
