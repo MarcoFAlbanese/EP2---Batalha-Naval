@@ -62,6 +62,13 @@ def foi_derrotado(matriz):
     
     return True
 
+#impressão do mapa com numeros e letras
+def imprime_mapa_com_numeros(mapa):
+    letras_colunas = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+    print("  " + " ".join(letras_colunas)) 
+    for i, linha in enumerate(mapa):
+        print(str(i) + " " + " ".join(linha))  
+
 # quantidade de blocos por modelo de navio
 config = {
     'destroyer': 3,
@@ -160,35 +167,62 @@ if numPaisEscolhido not in dicPaises:
     numPaisEscolhido=input("\n Qual o número de nação da sua frota?")
 print(" Você escolheu a nação {0} \n".format(dicPaises[numPaisEscolhido]))
 print("Agora é a sua vez de alocar seus navios de guerra!\n")
-numPaisEscolhido = dicPaises[numPaisEscolhido]
+nomePaisEscolhido = dicPaises[numPaisEscolhido]
 
 
 #Lista para cada pais, cada argumento é o número de blocos e cada indice é um barco
 aleatorioUser = input("Deseja alocar aleatoriamente a sua frota? Sim ou Não?")
 aleatorioUserLower = aleatorioUser.lower()
+lista_blocos=[]
+
 if (aleatorioUserLower== "sim"):
     lista_paises_frota = []
-    frotaEscolhida = paises[numPaisEscolhido]
+    frotaEscolhida = paises[nomePaisEscolhido]
     for navio in frotaEscolhida:
         numNavios = frotaEscolhida[navio]
+        lista_blocos.append(numNavios)
         for j in range(numNavios):
             lista_paises_frota.append(config[navio])
+else:
+    mapa_jogador=cria_mapa(10)
+    lista_paises_frota=[]
+    frotaEscolhida = paises[nomePaisEscolhido]
+    
+    imprime_mapa_com_numeros(mapa_jogador)
 
+    for navio in frotaEscolhida:
+        numNavios = frotaEscolhida[navio]
+        lista_blocos.append(numNavios)
+    
+    for navio in lista_blocos:
+        coluna_escolhida=input("Informe a letra")
+        linha_escolhida=int(input("Informe o número"))
+        orientacao_escolhida=input("Informe a orientação [v|h]")
+
+        while posicao_suporta(mapa_jogador,navio,linha_escolhida,coluna_escolhida,orientacao_escolhida)!=True:
+            print("Opção inválida")
+            coluna_escolhida=input("Informe a letra")
+            linha_escolhida=input("Informe o número")
+            orientacao_escolhida=input("Informe a orientação [v|h]")
+
+        else:
+            
+            if(orientacao_escolhida == "v"):
+                for l in range (navio):
+                    mapa_jogador[linha_escolhida+l][coluna_escolhida] = "N"
+            elif (orientacao_escolhida == "h"):
+                for l in range(navio):
+                    mapa_jogador[linha_escolhida][coluna_escolhida+l] = "N"
+    
 #print(lista_paises_frota)
 #criação de mapa do computador
-mapaFunc=aloca_navios(cria_mapa(10),lista_paises_frota)
+#mapaFunc=aloca_navios(cria_mapa(10),lista_paises_frota)
 
 
 
 #caracter bloco ▓
 
-#impressão do mapa com numeros e letras
 
-def imprime_mapa_com_numeros(mapa):
-    letras_colunas = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-    print("  " + " ".join(letras_colunas)) 
-    for i, linha in enumerate(mapa):
-        print(str(i) + " " + " ".join(linha))  
 
-imprime_mapa_com_numeros(mapaFunc)
+#imprime_mapa_com_numeros(mapaFunc)
 
