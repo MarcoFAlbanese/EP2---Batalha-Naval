@@ -260,7 +260,7 @@ imprime_mapa_com_numeros(mapa_comp)
 
 
 mapa_show_comp=cria_mapa(10)
-
+mapa_show_jog=cria_mapa(10)
 #caracter bloco ▓
 
 #rodada jogador
@@ -275,11 +275,9 @@ while (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
     if coluna_palpite_num == -1 or linha_palpite < 0 or linha_palpite >= len(mapa_jogador):
             print("Coordenadas inválidas! Por favor, escolha uma letra de coluna entre A e J e um número de linha entre 1 e 10.")
    
-
-    if (mapa_comp[linha_palpite][coluna_palpite_num]=="N"):
+    if (mapa_jogador[linha_palpite][coluna_palpite_num]=="N"):
         mapa_comp[linha_palpite][coluna_palpite_num]="A"
         mapa_show_comp[linha_palpite][coluna_palpite_num]="\u001b[31m▓\u001b[37m"
-        imprime_mapa_com_numeros(mapa_show_comp)
     
     elif (mapa_comp[linha_palpite][coluna_palpite_num]=="A"):
         print("Você já fez um chute nessa posição, escolha outra")
@@ -292,6 +290,28 @@ while (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
     else:
         mapa_show_comp[linha_palpite][coluna_palpite_num]="\u001b[34m▓\u001b[37m"
     imprime_mapa_com_numeros(mapa_show_comp)
-    
+
 #rodada computador
 
+    coluna_palpite_comp  = random.randint(0,9)
+    linha_palpite_comp = random.randint(0,9)
+
+    if coluna_palpite_comp == -1 or linha_palpite_comp < 0 or linha_palpite_comp >= len(mapa_jogador):
+            print("Coordenadas inválidas! Por favor, escolha uma letra de coluna entre A e J e um número de linha entre 1 e 10.")
+   
+    if (mapa_jogador[linha_palpite_comp][coluna_palpite_comp]=="N"):
+        mapa_jogador[linha_palpite_comp][coluna_palpite_comp]="A"
+        mapa_show_jog[linha_palpite_comp][coluna_palpite_comp]="\u001b[31m▓\u001b[37m"
+    
+    elif (mapa_comp[linha_palpite_comp][coluna_palpite_comp]=="A"):
+        print("Você já fez um chute nessa posição, escolha outra")
+
+
+    elif (mapa_comp[linha_palpite_comp][coluna_palpite_comp] == " "):
+        mapa_comp[linha_palpite_comp][coluna_palpite_comp]="A"
+        mapa_show_jog[linha_palpite_comp][coluna_palpite_comp]="\u001b[34m▓\u001b[37m"
+
+    else:
+        mapa_show_jog[linha_palpite_comp][coluna_palpite_comp]="\u001b[34m▓\u001b[37m"
+    imprime_mapa_com_numeros(mapa_show_jog)
+    
