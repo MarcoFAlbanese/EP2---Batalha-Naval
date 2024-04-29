@@ -291,6 +291,9 @@ while (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
         mapa_show_comp[linha_palpite][coluna_palpite_num]="\u001b[34m▓\u001b[37m"
     imprime_mapa_com_numeros(mapa_show_comp)
 
+    if (foi_derrotado(mapa_comp)==True):
+        break
+    
 #rodada computador
 
     coluna_palpite_comp  = random.randint(0,9)
