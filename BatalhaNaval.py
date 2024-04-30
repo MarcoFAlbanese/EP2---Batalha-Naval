@@ -257,15 +257,15 @@ del dic_pais_frota[pais_jogador]
 pais_comp=random.choice(list(dic_pais_frota.keys()))
 frota_comp=dic_pais_frota[pais_comp]
 mapa_comp = aloca_navios(cria_mapa(10),frota_comp)
-print(frota_comp)
-print(pais_comp)
+
+print("\n O computador escolheu {0}".format(pais_comp))
 print("\n")
-imprime_mapa_com_numeros(mapa_comp)
+
 
 
 mapa_show_comp=cria_mapa(10)
 mapa_show_jog=cria_mapa(10)
-#caracter bloco ▓
+
 
 #rodada jogador
 
@@ -335,8 +335,7 @@ while (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
     else:
         mapa_show_jog[linha_palpite_comp][coluna_palpite_comp]="\u001b[34m▓\u001b[37m"
     imprime_mapa_com_numeros(mapa_show_jog)
-    imprime_mapa_com_numeros(mapa_comp)
-
+    
 
 
 if (foi_derrotado(mapa_comp) == True):
