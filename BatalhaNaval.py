@@ -269,23 +269,37 @@ mapa_show_jog=cria_mapa(10)
 
 #rodada jogador
 
+lista_posicoes_coluna=['a','b','c','d','e','f','h','i','j']
+lista_posicoes_linha=[0,1,2,3,4,5,6,7,8,9]
+
 while (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
 
     coluna_palpite  = input("Informe a letra da coluna (A-J): ").lower()
     linha_palpite = int(input("Informe o número da linha (1-10): ")) - 1  
     
+    
+
+    while (coluna_palpite not in lista_posicoes_coluna) or (linha_palpite not in lista_posicoes_linha):
+            print("Coordenadas inválidas! Por favor, escolha uma letra de coluna entre A e J e um número de linha entre 1 e 10.")
+            coluna_palpite  = input("Informe a letra da coluna (A-J): ").lower()
+            linha_palpite = int(input("Informe o número da linha (1-10): ")) - 1  
+            coluna_palpite_num=relacao_coluna_num.get(coluna_palpite)
+
     coluna_palpite_num=relacao_coluna_num.get(coluna_palpite)
 
-    if coluna_palpite_num == -1 or linha_palpite < 0 or linha_palpite >= len(mapa_jogador):
-            print("Coordenadas inválidas! Por favor, escolha uma letra de coluna entre A e J e um número de linha entre 1 e 10.")
-   
     if (mapa_comp[linha_palpite][coluna_palpite_num]=="N"):
         mapa_comp[linha_palpite][coluna_palpite_num]="A"
         mapa_show_comp[linha_palpite][coluna_palpite_num]="\u001b[31m▓\u001b[37m"
     
     elif (mapa_comp[linha_palpite][coluna_palpite_num]=="A"):
         print("Você já fez um chute nessa posição, escolha outra")
-
+        
+        while (mapa_comp[linha_palpite][coluna_palpite_num]=="A"):
+            
+            coluna_palpite  = input("Informe a letra da coluna (A-J): ").lower()
+            linha_palpite = int(input("Informe o número da linha (1-10): ")) - 1  
+            coluna_palpite_num=relacao_coluna_num.get(coluna_palpite)
+            
 
     elif (mapa_comp[linha_palpite][coluna_palpite_num] == " "):
         mapa_comp[linha_palpite][coluna_palpite_num]="A"
