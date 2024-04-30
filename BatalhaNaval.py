@@ -65,9 +65,13 @@ def foi_derrotado(matriz):
 #impressão do mapa com numeros e letras
 def imprime_mapa_com_numeros(mapa):
     letras_colunas = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-    print("  " + " ".join(letras_colunas)) 
+    print("   " + " ".join(letras_colunas)) 
     for i, linha in enumerate(mapa):
-        print(str(i+1) + " " + " ".join(linha))  
+        numero_linha = str(i + 1)
+        espacos = " " * (2 - len(numero_linha))
+        if len(numero_linha) != 1:
+            espacos = ""
+        print(espacos + numero_linha + " " + " ".join(linha))
 
 # quantidade de blocos por modelo de navio
 config = {
