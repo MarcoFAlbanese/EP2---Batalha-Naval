@@ -314,11 +314,20 @@ while (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
         print("Você já fez um chute nessa posição, escolha outra")
 
 
-    elif (mapa_comp[linha_palpite_comp][coluna_palpite_comp] == " "):
-        mapa_comp[linha_palpite_comp][coluna_palpite_comp]="A"
+    elif (mapa_jogador[linha_palpite_comp][coluna_palpite_comp] == " "):
+        mapa_jogador[linha_palpite_comp][coluna_palpite_comp]="A"
         mapa_show_jog[linha_palpite_comp][coluna_palpite_comp]="\u001b[34m▓\u001b[37m"
 
     else:
         mapa_show_jog[linha_palpite_comp][coluna_palpite_comp]="\u001b[34m▓\u001b[37m"
     imprime_mapa_com_numeros(mapa_show_jog)
-    
+    imprime_mapa_com_numeros(mapa_comp)
+
+
+
+if (foi_derrotado(mapa_comp) == True):
+    print("\u001b[32m Parabéns, você venceu!\u001b[37m")    
+elif (foi_derrotado(mapa_jogador) == True):
+    print("\u001b[31m Que pena, você perdeu!\u001b[37m")
+
+
