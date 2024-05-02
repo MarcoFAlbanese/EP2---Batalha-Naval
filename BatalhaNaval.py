@@ -347,7 +347,7 @@ while (play_again == True):
         print("\u001b[31m Que pena, você perdeu!\u001b[37m")
 
     resposta_play_again = input("O jogo acabou, deseja jogar de novo? Sim ou não").lower()
-    while (resposta_play_again != "sim" or resposta_play_again !="não"):
+    while (resposta_play_again != "sim" or resposta_play_again !="não" or resposta_play_again !="nao"):
         print("Opcão invalida")
         resposta_play_again = input("O jogo acabou, deseja jogar de novo? Sim ou não").lower()
 
