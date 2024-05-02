@@ -309,7 +309,7 @@ while (play_again == True):
 
     #rodada jogador
 
-    lista_posicoes_coluna=['a','b','c','d','e','f','h','i','j']
+    lista_posicoes_coluna=['a','b','c','d','e','f','g','h','i','j']
     lista_posicoes_linha=[0,1,2,3,4,5,6,7,8,9]
 
     while (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
