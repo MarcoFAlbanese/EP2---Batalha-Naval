@@ -74,6 +74,22 @@ while (play_again == True):
                 espacos = ""
             print(espacos + numero_linha + " " + " ".join(linha))
 
+    def imprime_mapas_lado_a_lado(mapa1, mapa2):
+        letras_colunas = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        print("      Mapa Jogador                  Mapa Computador \n")
+        print("   " + " ".join(letras_colunas) + "       " + "   " + " ".join(letras_colunas))
+        for i in range(len(mapa1)):
+            numero_linha = str(i + 1)
+            espacos = " " * (2 - len(numero_linha))
+            if len(numero_linha) != 1:
+                espacos = ""
+            
+            linha_mapa1 = " ".join(mapa1[i])
+            linha_mapa2 = " ".join(mapa2[i])
+
+            print(espacos + numero_linha + " " + linha_mapa1 + "       " + espacos + numero_linha + " " + linha_mapa2)
+        print("\n")
+
     # quantidade de blocos por modelo de navio
     config = {
         'destroyer': 3,
@@ -139,7 +155,12 @@ while (play_again == True):
         'white': '\u001b[37m'
     }
 
+
+
     relacao_coluna_num = {"a":0,"b":1,"c":2,"d":3,"e":4,"f":5,"g":6,"h":7,"i":8,"j":9}
+
+    mapa_show_comp=cria_mapa(10)
+    mapa_show_jog=cria_mapa(10)
 
 
     #criar dicionario com todos os paises e suas frotas como bloquinhos
@@ -193,9 +214,14 @@ while (play_again == True):
     print("Agora é a sua vez de alocar seus navios de guerra!\n")
     nomePaisEscolhido = dicPaises[numPaisEscolhido]
 
+    lista_frota_print = []
+
+    for barco in paises[nomePaisEscolhido]:
+        for n in range (paises[nomePaisEscolhido][barco]):
+            lista_frota_print.append(barco)
 
     #Lista para cada pais, cada argumento é o número de blocos e cada indice é um barco
-    aleatorioUser = input("Deseja alocar aleatoriamente a sua frota? Sim ou Não?")
+    aleatorioUser = input("Deseja alocar aleatoriamente a sua frota? Sim ou Não? \n")
     aleatorioUserLower = aleatorioUser.lower()
     lista_blocos=[]
 
@@ -209,7 +235,13 @@ while (play_again == True):
             for j in range(numNavios):
                 lista_paises_frota.append(config[navio])
         mapa_jogador=aloca_navios(cria_mapa(10),lista_paises_frota)
-        imprime_mapa_com_numeros(mapa_jogador)
+
+        for e in range (len(mapa_jogador)):
+            for i in range (len(mapa_jogador[e])):
+                if mapa_jogador[e][i]=='N':
+                    mapa_show_jog[e][i]="\u001b[32m▓\u001b[37m"
+        
+        imprime_mapas_lado_a_lado(mapa_show_jog,mapa_show_comp)
 
 # loop parao usuario escolher os navios que quer alocar
     else:
@@ -217,7 +249,7 @@ while (play_again == True):
         lista_paises_frota=[]
         frotaEscolhida = paises[nomePaisEscolhido]
         
-        imprime_mapa_com_numeros(mapa_jogador)
+        imprime_mapas_lado_a_lado(mapa_jogador,mapa_show_comp)
 
         for navio in frotaEscolhida:
             numNavios = frotaEscolhida[navio]
@@ -225,12 +257,16 @@ while (play_again == True):
             for i in range(numNavios):
                 lista_blocos.append(numBlocos)
         
+        n =0
         
         for navio in lista_blocos:
+            
+            print("Navio a ser alocado: {0}".format(lista_frota_print[n]))
+            print("Próximos navios a serem alocados: {0}".format(lista_frota_print[n:-1]))
             coluna_escolhida = input("Informe a letra da coluna (A-J): ").lower()
             linha_escolhida = int(input("Informe o número da linha (1-10): ")) - 1  
             orientacao_escolhida = input("Informe a orientação [v|h]: ").lower()
-
+            n +=1 
             coluna_escolhida_num = relacao_coluna_num.get(coluna_escolhida, -1)  
 
             
@@ -247,12 +283,18 @@ while (play_again == True):
             # Coloca o navio no mapa
             if orientacao_escolhida == "v":
                 for l in range(navio):
-                    mapa_jogador[linha_escolhida + l][coluna_escolhida_num] = "\u001b[32m▓\u001b[37m"
+                    mapa_jogador[linha_escolhida + l][coluna_escolhida_num] = "N"
             elif orientacao_escolhida == "h":
                 for l in range(navio):
-                    mapa_jogador[linha_escolhida][coluna_escolhida_num + l] = "\u001b[32m▓\u001b[37m"
+                    mapa_jogador[linha_escolhida][coluna_escolhida_num + l] = "N"
 
-            imprime_mapa_com_numeros(mapa_jogador)
+            for e in range (len(mapa_jogador)):
+                for i in range (len(mapa_jogador[e])):
+                    if mapa_jogador[e][i]=='N':
+                        mapa_show_jog[e][i]="\u001b[32m▓\u001b[37m"
+        
+            imprime_mapas_lado_a_lado(mapa_show_jog,mapa_show_comp)
+
 
     pais_jogador=dicPaises[numPaisEscolhido]
     del dic_pais_frota[pais_jogador]
@@ -263,11 +305,6 @@ while (play_again == True):
 
     print("\n O computador escolheu {0}".format(pais_comp))
     print("\n")
-
-
-
-    mapa_show_comp=cria_mapa(10)
-    mapa_show_jog=cria_mapa(10)
 
 
     #rodada jogador
@@ -310,7 +347,8 @@ while (play_again == True):
 
         else:
             mapa_show_comp[linha_palpite][coluna_palpite_num]="\u001b[34m▓\u001b[37m"
-        imprime_mapa_com_numeros(mapa_show_comp)
+
+        imprime_mapas_lado_a_lado(mapa_show_jog,mapa_show_comp)  
 
         if (foi_derrotado(mapa_comp)==True):
             break
@@ -337,7 +375,7 @@ while (play_again == True):
 
         else:
             mapa_show_jog[linha_palpite_comp][coluna_palpite_comp]="\u001b[34m▓\u001b[37m"
-        imprime_mapa_com_numeros(mapa_show_jog)
+        imprime_mapas_lado_a_lado(mapa_show_jog,mapa_show_comp)  
         
 
 
