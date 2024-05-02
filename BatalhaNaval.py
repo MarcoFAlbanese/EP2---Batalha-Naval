@@ -199,6 +199,7 @@ while (play_again == True):
     aleatorioUserLower = aleatorioUser.lower()
     lista_blocos=[]
 
+# loop para alocar aleatoriamente os navios do usuario
     if (aleatorioUserLower== "sim"):
         lista_paises_frota = []
         frotaEscolhida = paises[nomePaisEscolhido]
@@ -210,6 +211,7 @@ while (play_again == True):
         mapa_jogador=aloca_navios(cria_mapa(10),lista_paises_frota)
         imprime_mapa_com_numeros(mapa_jogador)
 
+# loop parao usuario escolher os navios que quer alocar
     else:
         mapa_jogador=cria_mapa(10)
         lista_paises_frota=[]
