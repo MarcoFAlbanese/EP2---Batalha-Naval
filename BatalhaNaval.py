@@ -262,13 +262,31 @@ while (play_again == True):
         for navio in lista_blocos:
             
             print("Navio a ser alocado: {0}".format(lista_frota_print[n]))
-            print("Próximos navios a serem alocados: {0}".format(lista_frota_print[n:-1]))
+            lista_frota_print.remove(lista_frota_print[n])
+            print("Próximos navios a serem alocados: {0}".format(lista_frota_print))
             coluna_escolhida = input("Informe a letra da coluna (A-J): ").lower()
-            linha_escolhida = int(input("Informe o número da linha (1-10): ")) - 1  
-            orientacao_escolhida = input("Informe a orientação [v|h]: ").lower()
-            n +=1 
+
+            valido=True  
+
+            lista_posicoes_coluna=['a','b','c','d','e','f','g','h','i','j']
+            
+
+            while (coluna_escolhida not in lista_posicoes_coluna):
+                    print("Coordenada inválida! Por favor, escolha uma letra de coluna entre A e J.")
+                    coluna_palpite  = input("Informe a letra da coluna (A-J): ").lower()
+            
             coluna_escolhida_num = relacao_coluna_num.get(coluna_escolhida, -1)  
 
+            valido=True  
+
+            while valido==True:
+                try:
+                    linha_escolhida = int(input("Informe o número da linha (1-10): "))-1
+                    valido=False
+                except ValueError:
+                    print("Coordenada inválida. Por favor, escolha um número de 1-10")
+            
+            orientacao_escolhida=input("Escolha a orientação do navio [v/h]").lower()
             
             if coluna_escolhida_num == -1 or linha_escolhida < 0 or linha_escolhida >= len(mapa_jogador):
                 print("Coordenadas inválidas! Por favor, escolha uma letra de coluna entre A e J e um número de linha entre 1 e 10.")
@@ -277,7 +295,8 @@ while (play_again == True):
                 print("Orientação inválida! Por favor, escolha 'v' para vertical ou 'h' para horizontal.")
                 continue
             if not posicao_suporta(mapa_jogador, navio, linha_escolhida, coluna_escolhida_num, orientacao_escolhida):
-                print("Navio não cabe nesta posição. Escolha outra posição.")
+                print("Navio não cabe nesta posição. Escolha outra posição.\n")
+                imprime_mapas_lado_a_lado(mapa_show_jog,mapa_show_comp)
                 continue
 
             # Coloca o navio no mapa
@@ -308,8 +327,6 @@ while (play_again == True):
 
 
     #rodada jogador
-
-    lista_posicoes_coluna=['a','b','c','d','e','f','g','h','i','j']
     lista_posicoes_linha=[0,1,2,3,4,5,6,7,8,9]
 
     while (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
