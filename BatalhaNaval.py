@@ -384,10 +384,14 @@ while (play_again == True):
     elif (foi_derrotado(mapa_jogador) == True):
         print("\u001b[31m Que pena, você perdeu!\u001b[37m")
 
-    resposta_play_again = input("O jogo acabou, deseja jogar de novo? Sim ou não").lower()
-    while (resposta_play_again != "sim" or resposta_play_again !="não" or resposta_play_again !="nao"):
-        print("Opcão invalida")
-        resposta_play_again = input("O jogo acabou, deseja jogar de novo? Sim ou não").lower()
+    resposta_play_again = input("O jogo acabou, deseja jogar de novo? Sim ou não")
+    resposta_play_again_lower=resposta_play_again.lower()
+
+    if resposta_play_again_lower not in ["sim","não","nao"]:
+        while (resposta_play_again_lower not in ["sim","não","nao"]):
+            print("Opcão invalida")
+            resposta_play_again = input("O jogo acabou, deseja jogar de novo? Sim ou não")
+            resposta_play_again_lower=resposta_play_again.lower()
 
     if (resposta_play_again == "sim"):
         play_again = True
