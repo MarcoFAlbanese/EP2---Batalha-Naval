@@ -315,16 +315,20 @@ while (play_again == True):
     while (foi_derrotado(mapa_comp)==False) or (foi_derrotado(mapa_jogador)==False):
 
         coluna_palpite  = input("Informe a letra da coluna (A-J): ").lower()
-        linha_palpite = int(input("Informe o número da linha (1-10): ")) - 1  
-        
-        
 
-        while (coluna_palpite not in lista_posicoes_coluna) or (linha_palpite not in lista_posicoes_linha):
-                print("Coordenadas inválidas! Por favor, escolha uma letra de coluna entre A e J e um número de linha entre 1 e 10.")
+        while (coluna_palpite not in lista_posicoes_coluna):
+                print("Coordenada inválida! Por favor, escolha uma letra de coluna entre A e J.")
                 coluna_palpite  = input("Informe a letra da coluna (A-J): ").lower()
-                linha_palpite = int(input("Informe o número da linha (1-10): ")) - 1  
-                coluna_palpite_num=relacao_coluna_num.get(coluna_palpite)
 
+        valido=True  
+
+        while valido==True:
+            try:
+                linha_palpite = int(input("Informe o número da linha (1-10): "))-1
+                valido=False
+            except ValueError:
+                print("Coordenada inválida. Por favor, escolha um número de 1-10")
+        
         coluna_palpite_num=relacao_coluna_num.get(coluna_palpite)
 
         if (mapa_comp[linha_palpite][coluna_palpite_num]=="N"):
