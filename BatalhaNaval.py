@@ -350,9 +350,7 @@ while (play_again == True):
             mapa_show_comp[linha_palpite][coluna_palpite_num]="\u001b[34m▓\u001b[37m"
 
         else:
-            mapa_show_comp[linha_palpite][coluna_palpite_num]="\u001b[34m▓\u001b[37m"
-
-        imprime_mapas_lado_a_lado(mapa_show_jog,mapa_show_comp)  
+            mapa_show_comp[linha_palpite][coluna_palpite_num]="\u001b[34m▓\u001b[37m"  
 
         if (foi_derrotado(mapa_comp)==True):
             break
