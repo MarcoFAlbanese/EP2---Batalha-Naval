@@ -158,6 +158,7 @@ while (play_again == True):
 
 
     relacao_coluna_num = {"a":0,"b":1,"c":2,"d":3,"e":4,"f":5,"g":6,"h":7,"i":8,"j":9}
+    lista_posicoes_coluna=['a','b','c','d','e','f','g','h','i','j']
 
     mapa_show_comp=cria_mapa(10)
     mapa_show_jog=cria_mapa(10)
@@ -266,9 +267,7 @@ while (play_again == True):
             print("Próximos navios a serem alocados: {0}".format(lista_frota_print))
             coluna_escolhida = input("Informe a letra da coluna (A-J): ").lower()
 
-            valido=True  
-
-            lista_posicoes_coluna=['a','b','c','d','e','f','g','h','i','j']
+            valido=True 
             
 
             while (coluna_escolhida not in lista_posicoes_coluna):
